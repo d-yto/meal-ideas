@@ -33,8 +33,8 @@ async function getWeather(latitude, longitude, unit = "celsius") {
     const params = new URLSearchParams({
         latitude,
         longitude,
-        current:"temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code",
-        unit
+        current:`temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,weather_code`,
+        unit,
     })
     try{
         const response = await fetch(`${WEATHER_URL}?${params}`)
@@ -48,6 +48,7 @@ async function getWeather(latitude, longitude, unit = "celsius") {
                 humidity:data.current.relative_humidity_2m,
                 windSpeed:data.current.wind_speed_10m,
                 weatherCode:data.current.weather_code,
+                precipitation:data.current.precipitation
             }   
         }
         catch(error){
